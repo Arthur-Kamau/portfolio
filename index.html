@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenn Kamau - Full Stack Developer</title>
+    <meta name="description" content="Full Stack Developer specializing in Rust, TypeScript, Kotlin, and Web3. Building data integrity protocols, government systems, and energy platforms.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --bg-card: #141416;
+            --bg-card-hover: #1a1a1e;
+            --border: #2a2a2e;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --green: #22c55e;
+            --orange: #f59e0b;
+            --purple: #a78bfa;
+            --pink: #f472b6;
+            --cyan: #22d3ee;
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            background: var(--bg-card);
+        }
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--text-muted);
+            background: var(--bg-card);
+        }
+
+        /* Sections */
+        section { padding: 6rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--text), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.25s;
+        }
+        .skill-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+        .skill-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tag {
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+        }
+        .tag.rust { background: rgba(239, 68, 68, 0.1); color: var(--red); border-color: rgba(239, 68, 68, 0.15); }
+        .tag.go { background: rgba(34, 211, 238, 0.1); color: var(--cyan); border-color: rgba(34, 211, 238, 0.15); }
+        .tag.kotlin { background: rgba(167, 139, 250, 0.1); color: var(--purple); border-color: rgba(167, 139, 250, 0.15); }
+        .tag.web3 { background: rgba(244, 114, 182, 0.1); color: var(--pink); border-color: rgba(244, 114, 182, 0.15); }
+        .tag.green { background: rgba(34, 197, 94, 0.1); color: var(--green); border-color: rgba(34, 197, 94, 0.15); }
+
+        /* Experience Timeline */
+        .timeline { position: relative; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 3rem;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+        }
+        .timeline-item.current::before {
+            background: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+        .timeline-org {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .timeline-desc li {
+            margin-bottom: 0.35rem;
+            list-style: none;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+        .timeline-desc li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .project-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .project-header a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .project-header a:hover { color: var(--accent); }
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex: 1;
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-lang {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .lang-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .lang-dot.rust { background: #dea584; }
+        .lang-dot.typescript { background: #3178c6; }
+        .lang-dot.javascript { background: #f1e05a; }
+        .lang-dot.svelte { background: #ff3e00; }
+        .lang-dot.c { background: #555555; }
+        .lang-dot.kotlin { background: #A97BFF; }
+        .lang-dot.php { background: #4F5D95; }
+        .lang-dot.shell { background: #89e051; }
+        .project-stars {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .project-activity {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* GitHub Activity */
+        .activity-bar {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .activity-block {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            background: var(--border);
+        }
+        .activity-block.l1 { background: rgba(59, 130, 246, 0.25); }
+        .activity-block.l2 { background: rgba(59, 130, 246, 0.45); }
+        .activity-block.l3 { background: rgba(59, 130, 246, 0.7); }
+        .activity-block.l4 { background: var(--accent); }
+
+        /* Education */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+        .edu-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .edu-card .institution {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .edu-card .year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .contact-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            flex-shrink: 0;
+        }
+        .contact-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--accent);
+        }
+        .contact-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .contact-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 11, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid var(--border);
+                gap: 1rem;
+            }
+            .hamburger { display: flex; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 1.25rem; }
+            .hero { padding: 5rem 1.25rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">kenn<span>.</span>dev</a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Available for projects
+        </div>
+        <h1>
+            I'm Kenn Kamau<br>
+            <span class="gradient">Full Stack Developer</span>
+        </h1>
+        <p>
+            Building production systems across government infrastructure, data integrity protocols, and energy platforms. From low-level Rust to mobile apps, I ship code that scales.
+        </p>
+        <div class="hero-actions">
+            <a href="https://github.com/Arthur-Kamau" class="btn btn-primary" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://stackoverflow.com/users/8380779/kenn" class="btn btn-outline" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.65l-.905 1.94 9.702 4.517.905-1.94-9.702-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154z"/></svg>
+                Stack Overflow
+            </a>
+            <a href="mailto:kamaukenn11@gmail.com" class="btn btn-outline">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Email Me
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About / Stats -->
+<section id="about">
+    <div class="container">
+        <p class="section-label">// about</p>
+        <h2 class="section-title">Building at the intersection of systems and scale</h2>
+        <p class="section-desc">
+            Self-taught developer with 9+ years shipping production software. I move across the full stack &mdash; from kernel-level Rust libraries and blockchain protocols to government-scale USSD platforms and real-time energy management systems.
+        </p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">9+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">11+</div>
+                <div class="stat-label">Organizations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Repositories</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" style="background: var(--bg-card);">
+    <div class="container">
+        <p class="section-label">// skills</p>
+        <h2 class="section-title">Technical Expertise</h2>
+        <p class="section-desc">Production experience across the full stack, from embedded protocols to cloud-native platforms.</p>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    Languages
+                </h3>
+                <div class="skill-tags">
+                    <span class="tag rust">Rust</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag kotlin">Kotlin</span>
+                    <span class="tag go">Go</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">Dart</span>
+                    <span class="tag">C</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Frontend &amp; Mobile
+                </h3>
+                <div class="skill-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Svelte</span>
+                    <span class="tag">Flutter</span>
+                    <span class="tag green">Android SDK</span>
+                    <span class="tag">Jetpack Compose</span>
+                    <span class="tag">Tailwind CSS</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    Backend &amp; Infra
+                </h3>
+                <div class="skill-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag go">Go</span>
+                    <span class="tag rust">Rust</span>
+                    <span class="tag">PHP/Laravel</span>
+                    <span class="tag green">Docker</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Firebase</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    Web3 &amp; Protocols
+                </h3>
+                <div class="skill-tags">
+                    <span class="tag web3">Aqua Protocol</span>
+                    <span class="tag web3">NEAR Blockchain</span>
+                    <span class="tag web3">Ethereum/ENS</span>
+                    <span class="tag">Nostr</span>
+                    <span class="tag web3">OIDC/SIWX</span>
+                    <span class="tag">WASM</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+    <div class="container">
+        <p class="section-label">// experience</p>
+        <h2 class="section-title">Where I've Built Things</h2>
+        <p class="section-desc">Production systems across government, enterprise, and open-source ecosystems.</p>
+        <div class="timeline">
+
+            <div class="timeline-item current">
+                <div class="timeline-date">Nov 2024 &mdash; Present</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">Inblock.io / Web3Clubs &mdash; Data Integrity Protocols</div>
+                <ul class="timeline-desc">
+                    <li>Architected and implemented Aqua Protocol v3 &amp; v4 in Rust and TypeScript</li>
+                    <li>Built data governance libraries used by developers across the ecosystem</li>
+                    <li>Scaled pilot from &lt;10 to 200+ users</li>
+                    <li>Integrated Web3 and Web2 systems into hybrid architecture</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item current">
+                <div class="timeline-date">2024 &mdash; Present</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">KROM Systems &mdash; Energy Management Platform</div>
+                <ul class="timeline-desc">
+                    <li>Building Chaca Energy: IoT energy monitoring with MQTT telemetry</li>
+                    <li>Auto-registration of gateways and meters from live telemetry data</li>
+                    <li>Acrel integration for prepaid meter management with idempotent payments</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jun 2024 &mdash; Dec 2024</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">Private Security Regulatory Authority &mdash; Ministry of Interior</div>
+                <ul class="timeline-desc">
+                    <li>Built and deployed PSRA USSD *222*33# for national guard registration</li>
+                    <li>Built analytics dashboard for national metrics on private security officers</li>
+                    <li>Provided support for users registering and verifying guard force numbers</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Feb 2023 &mdash; Dec 2024</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">Ministry of Interior &mdash; Government of Kenya</div>
+                <ul class="timeline-desc">
+                    <li>Digitalized manual administrative systems, reducing report times</li>
+                    <li>Built internal digital platform eliminating paperwork and reducing expenses</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2021 &mdash; 2023</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">Kiss Devs &mdash; Contractor for WFP Somalia</div>
+                <ul class="timeline-desc">
+                    <li>Built warehouse management mobile app for Somalia Ministry of Health</li>
+                    <li>Translated API and app to Somali; upgraded PHP framework</li>
+                    <li>System deployed across southern Somalia with large-scale operations</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jun 2023 &mdash; Jun 2024</div>
+                <div class="timeline-role">Full Stack Developer</div>
+                <div class="timeline-org">Damusasa &mdash; 2,000+ users, 10K+ requests/day</div>
+                <ul class="timeline-desc">
+                    <li>Established code patterns to prevent regression bugs</li>
+                    <li>Resolved 3 persistent bugs across multiple releases</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jan 2023 &mdash; Apr 2023</div>
+                <div class="timeline-role">Frontend Developer</div>
+                <div class="timeline-org">System Partners &mdash; Healthcare Analytics</div>
+                <ul class="timeline-desc">
+                    <li>Built React dashboard used by 100+ hospitals in Kenya</li>
+                    <li>Collected 10,000+ data points from public hospitals</li>
+                    <li>Improved API response times through system analysis</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2022</div>
+                <div class="timeline-role">NEAR Blockchain Tutor &amp; Grant Analyst</div>
+                <div class="timeline-org">Sankore 2.0 &amp; BitKe</div>
+                <ul class="timeline-desc">
+                    <li>Trained developers on NEAR blockchain development</li>
+                    <li>Reviewed grant projects and provided technical support for Africa region</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2018 &mdash; 2021</div>
+                <div class="timeline-role">Software Developer</div>
+                <div class="timeline-org">Ally Innovations</div>
+                <ul class="timeline-desc">
+                    <li>Built cross-platform mobile applications with Flutter and native Android</li>
+                    <li>Code reviews, telemetry analysis, and Play Store deployments</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" style="background: var(--bg-card);">
+    <div class="container">
+        <p class="section-label">// projects</p>
+        <h2 class="section-title">Featured Work</h2>
+        <p class="section-desc">Open-source projects and recent GitHub activity. Active across 30+ repositories.</p>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>aquafier-js</h3>
+                    <a href="https://github.com/inblockio/aquafier-js" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Aqua Protocol web application with TypeScript SDK. Data integrity verification platform with Docker deployment, pnpm monorepo.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot typescript"></span> TypeScript
+                    </div>
+                    <div class="project-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568L24 9.306l-6 5.862 1.416 8.245L12 19.446l-7.416 3.967L6 15.168 0 9.306l8.332-1.151z"/></svg>
+                        59
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>stratos</h3>
+                    <a href="https://github.com/Arthur-Kamau/stratos" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    A low-level, fast, type-safe programming language. Custom compiler with SDF anti-aliased rendering, HiDPI GUI toolkit, and WASM web target.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot c"></span> C
+                    </div>
+                    <div class="project-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568L24 9.306l-6 5.862 1.416 8.245L12 19.446l-7.416 3.967L6 15.168 0 9.306l8.332-1.151z"/></svg>
+                        6
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>aqua-js-sdk</h3>
+                    <a href="https://github.com/inblockio/aqua-js-sdk" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Implementation of Aqua Protocol v3.2. Nostr witness with relay fallback, TSA timestamping, and comprehensive form verification.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot typescript"></span> TypeScript
+                    </div>
+                    <div class="project-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568L24 9.306l-6 5.862 1.416 8.245L12 19.446l-7.416 3.967L6 15.168 0 9.306l8.332-1.151z"/></svg>
+                        2
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>specra-sdk</h3>
+                    <a href="https://github.com/SpecraDocs/specra-sdk" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Customizable documentation framework built on SvelteKit. Multi-product versioning, tab groups, prerender optimization for static builds.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot svelte"></span> Svelte
+                    </div>
+                    <div class="project-activity">updated 2d ago</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>epistery</h3>
+                    <a href="https://github.com/rootz-global/epistery" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Web plugin for knowledge management. Identity contracts, corrupt key handling, and versioned release pipeline.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot javascript"></span> JavaScript
+                    </div>
+                    <div class="project-activity">updated 2d ago</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>siwx-oidc-matrix-server</h3>
+                    <a href="https://github.com/Arthur-Kamau/siwx-oidc-matrix-server" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Matrix (Synapse) homeserver with SIWX-OIDC provider. Enables wallet and agent login via crypto keys with ENS display name resolution.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot shell"></span> Docker / Shell
+                    </div>
+                    <div class="project-activity">Web3 identity</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>aqua-js-cli</h3>
+                    <a href="https://github.com/inblockio/aqua-js-cli" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    CLI for Aqua Protocol external verification. Offline PDF verification with embedded aqua chain data extraction.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot javascript"></span> JavaScript
+                    </div>
+                    <div class="project-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568L24 9.306l-6 5.862 1.416 8.245L12 19.446l-7.416 3.967L6 15.168 0 9.306l8.332-1.151z"/></svg>
+                        3
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>aqua-docs</h3>
+                    <a href="https://github.com/inblockio/aqua-docs" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Aqua Protocol specification and documentation site. Built with Next.js, including versioned docs and interactive protocol guides.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot typescript"></span> TypeScript
+                    </div>
+                    <div class="project-stars">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568L24 9.306l-6 5.862 1.416 8.245L12 19.446l-7.416 3.967L6 15.168 0 9.306l8.332-1.151z"/></svg>
+                        1
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>specra-app</h3>
+                    <a href="https://github.com/SpecraDocs/specra-app" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <p class="project-desc">
+                    Desktop and mobile app for Specra documentation platform. Built with Svelte 5 and Tauri for non-technical users.
+                </p>
+                <div class="project-meta">
+                    <div class="project-lang">
+                        <span class="lang-dot svelte"></span> Svelte
+                    </div>
+                    <div class="project-activity">cross-platform</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+            <a href="https://github.com/Arthur-Kamau?tab=repositories" class="btn btn-outline" target="_blank" rel="noopener">
+                View All Repositories
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+    <div class="container">
+        <p class="section-label">// education</p>
+        <h2 class="section-title">Education &amp; Credentials</h2>
+        <div class="edu-grid">
+            <div class="edu-card">
+                <h3>Bachelor of Arts, Sociology</h3>
+                <div class="institution">Moi University</div>
+                <div class="year">2013 &mdash; 2018 &bull; 2nd Class Upper Division</div>
+            </div>
+            <div class="edu-card">
+                <h3>CPA (Section 5)</h3>
+                <div class="institution">KCA University</div>
+                <div class="year">2013 &mdash; 2017 &bull; Certified Public Accountant</div>
+            </div>
+            <div class="edu-card">
+                <h3>Community Contributions</h3>
+                <div class="institution">Android / Flutter Kenya</div>
+                <div class="year">Mentor at Andela Learning Community (ALC) &bull; Google Africa Scholarship</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="background: var(--bg-card);">
+    <div class="container">
+        <p class="section-label">// contact</p>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-desc">Open to full-stack, systems, and Web3 project opportunities.</p>
+        <div class="contact-grid">
+            <a href="mailto:kamaukenn11@gmail.com" class="contact-card">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div class="contact-info">
+                    <h3>Email</h3>
+                    <p>kamaukenn11@gmail.com</p>
+                </div>
+            </a>
+            <a href="https://github.com/Arthur-Kamau" class="contact-card" target="_blank" rel="noopener">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </div>
+                <div class="contact-info">
+                    <h3>GitHub</h3>
+                    <p>Arthur-Kamau</p>
+                </div>
+            </a>
+            <a href="https://stackoverflow.com/users/8380779/kenn" class="contact-card" target="_blank" rel="noopener">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.65l-.905 1.94 9.702 4.517.905-1.94-9.702-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154z"/></svg>
+                </div>
+                <div class="contact-info">
+                    <h3>Stack Overflow</h3>
+                    <p>stackoverflow.com/users/8380779</p>
+                </div>
+            </a>
+            <a href="tel:+254717008240" class="contact-card">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-info">
+                    <h3>Phone</h3>
+                    <p>+254 717 008 240</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        &copy; 2026 Kenn Kamau. Nairobi, Kenya.
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+    });
+});
+</script>
+
+</body>
+</html>

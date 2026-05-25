@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenn Kamau - CV & Portfolio</title>
+    <meta name="description" content="Kenn Kamau — Full Stack Developer. CV, portfolio, and project highlights.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        @media print {
+            .page { padding: 0; }
+            .no-print { display: none !important; }
+            a { color: var(--text) !important; text-decoration: none !important; }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid var(--text);
+            margin-bottom: 2.5rem;
+        }
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+        .header .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .header-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+        .header-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .header-links a:hover { color: var(--accent); }
+        .header-links svg { width: 16px; height: 16px; }
+
+        /* Sections */
+        .section { margin-bottom: 2.5rem; }
+        .section h2 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .section p, .section li {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section ul li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.35rem;
+        }
+        .section ul li::before {
+            content: '\2022';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Skills row */
+        .skills-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 0.25rem 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .skills-row dt {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .skills-row dd {
+            color: var(--text-muted);
+        }
+
+        /* Experience entry */
+        .entry {
+            margin-bottom: 1.75rem;
+            page-break-inside: avoid;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 0.15rem;
+        }
+        .entry-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .entry-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .entry-org {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .entry-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        /* Projects table */
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .project-table th {
+            text-align: left;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 2px solid var(--border);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+        .project-table td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .project-table a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .project-table a:hover { text-decoration: underline; }
+        .project-table .lang-badge {
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        /* Education */
+        .edu-entry {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0.5rem 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .edu-entry .year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .edu-entry .degree {
+            font-weight: 600;
+        }
+        .edu-entry .school {
+            color: var(--text-muted);
+        }
+
+        /* Download bar */
+        .download-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--bg);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s;
+        }
+        .dl-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .dl-btn.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .dl-btn.primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Referees */
+        .ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .ref-card {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .ref-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+        .ref-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .page { padding: 1.5rem 1rem; }
+            .skills-row { grid-template-columns: 1fr; }
+            .edu-entry { grid-template-columns: 1fr; }
+            .entry-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <div class="download-bar no-print">
+        <a href="index.html" class="dl-btn primary">View Full Portfolio</a>
+        <button class="dl-btn" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save PDF
+        </button>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Kenn Njenga Kamau</h1>
+        <div class="subtitle">Full Stack Developer</div>
+        <div class="header-links">
+            <a href="mailto:kamaukenn11@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                kamaukenn11@gmail.com
+            </a>
+            <a href="tel:+254717008240">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +254 717 008 240
+            </a>
+            <a href="https://github.com/Arthur-Kamau" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Arthur-Kamau
+            </a>
+            <a href="https://stackoverflow.com/users/8380779/kenn" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.65l-.905 1.94 9.702 4.517.905-1.94-9.702-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154z"/></svg>
+                Stack Overflow
+            </a>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>Full Stack Developer with 9+ years of experience building production systems across government infrastructure, data integrity protocols, energy platforms, and healthcare analytics. I work across the entire stack &mdash; from low-level Rust libraries and blockchain protocols to mobile applications and cloud-native platforms. Active contributor to open-source projects with 30+ repositories and proven ability to scale systems from prototype to thousands of users.</p>
+    </div>
+
+    <!-- Skills -->
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <dl class="skills-row">
+            <dt>Languages</dt>
+            <dd>Rust, TypeScript, JavaScript, Kotlin, Go, Java, PHP, Dart, Python, C</dd>
+        </dl>
+        <dl class="skills-row">
+            <dt>Frontend</dt>
+            <dd>React, Svelte/SvelteKit, Flutter, Android SDK, Jetpack Compose, Tailwind CSS</dd>
+        </dl>
+        <dl class="skills-row">
+            <dt>Backend</dt>
+            <dd>Node.js, Go, Rust, PHP/Laravel, PostgreSQL, Firebase, MQTT</dd>
+        </dl>
+        <dl class="skills-row">
+            <dt>Infrastructure</dt>
+            <dd>Docker, CI/CD, Linux, system design, Git, GitHub/GitLab</dd>
+        </dl>
+        <dl class="skills-row">
+            <dt>Web3</dt>
+            <dd>Aqua Protocol (v3 & v4), NEAR Blockchain, Ethereum/ENS, Nostr, OIDC/SIWX, WASM</dd>
+        </dl>
+    </div>
+
+    <!-- Experience -->
+    <div class="section">
+        <h2>Experience</h2>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">Nov 2024 &mdash; Present</span>
+            </div>
+            <div class="entry-org">Inblock.io / Web3Clubs &mdash; Data Integrity Protocols</div>
+            <ul>
+                <li>Architected and implemented Aqua Protocol v3 & v4 in Rust and TypeScript, ensuring data integrity across the ecosystem</li>
+                <li>Built data governance libraries and CLI tools used by developers (aquafier-js &mdash; 59 GitHub stars)</li>
+                <li>Scaled the platform from &lt;10 to 200+ active users; integrated Web3/Web2 hybrid architecture</li>
+                <li>Developed Nostr witness with relay fallback, TSA timestamping, and offline PDF verification</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">2024 &mdash; Present</span>
+            </div>
+            <div class="entry-org">KROM Systems &mdash; IoT Energy Management</div>
+            <ul>
+                <li>Building Chaca Energy: real-time IoT energy monitoring platform with MQTT telemetry</li>
+                <li>Implemented auto-registration of gateways/meters and Acrel smart meter API with idempotent payments</li>
+                <li>Built consumer mobile app (Stima Yangu) for prepaid meter management</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">Jun 2024 &mdash; Dec 2024</span>
+            </div>
+            <div class="entry-org">Private Security Regulatory Authority (PSRA) &mdash; Ministry of Interior</div>
+            <ul>
+                <li>Built and deployed national USSD service *222*33# for guard registration and verification</li>
+                <li>Built analytics dashboard providing national metrics on private security officers</li>
+                <li>Digitized different generations of guard force numbers into a unified system</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">Feb 2023 &mdash; Dec 2024</span>
+            </div>
+            <div class="entry-org">Ministry of Interior &mdash; Government of Kenya</div>
+            <ul>
+                <li>Digitalized manual administrative systems, reducing report times and eliminating paperwork</li>
+                <li>Built internal digital platform for national government administrative officers</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">2021 &mdash; 2023</span>
+            </div>
+            <div class="entry-org">Kiss Devs &mdash; Contractor for WFP Somalia</div>
+            <ul>
+                <li>Built warehouse management mobile app for Somalia Ministry of Health, deployed across southern Somalia</li>
+                <li>Translated API and app to Somali; upgraded PHP framework to latest version</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Full Stack Developer</h3>
+                <span class="entry-date">Jun 2023 &mdash; Jun 2024</span>
+            </div>
+            <div class="entry-org">Damusasa &mdash; 2,000+ users, 10K+ daily requests</div>
+            <ul>
+                <li>Resolved 3 persistent bugs across multiple releases; established code patterns to prevent regressions</li>
+                <li>Served 2,000+ users handling 10,000+ requests per day</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Frontend Developer</h3>
+                <span class="entry-date">Jan 2023 &mdash; Apr 2023</span>
+            </div>
+            <div class="entry-org">System Partners &mdash; Healthcare Analytics</div>
+            <ul>
+                <li>Built React dashboard for 100+ hospitals in Kenya, collecting 10,000+ data points</li>
+                <li>Improved API response times through system analysis and performance optimization</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>NEAR Blockchain Tutor & Grant Analyst</h3>
+                <span class="entry-date">Mar 2022 &mdash; Jan 2023</span>
+            </div>
+            <div class="entry-org">Sankore 2.0 & BitKe</div>
+            <ul>
+                <li>Trained developers on NEAR blockchain development and software fundamentals</li>
+                <li>Reviewed grant projects for the NEAR Foundation across Africa</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <h3>Software Developer</h3>
+                <span class="entry-date">2018 &mdash; Jun 2021</span>
+            </div>
+            <div class="entry-org">Ally Innovations</div>
+            <ul>
+                <li>Built cross-platform mobile applications with Flutter and native Android APIs</li>
+                <li>Code reviews, automated telemetry analysis, and Play Store deployments</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Open Source -->
+    <div class="section">
+        <h2>Open Source & Projects</h2>
+        <table class="project-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Stack</th>
+                    <th>Description</th>
+                    <th>Stars</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://github.com/inblockio/aquafier-js" target="_blank">aquafier-js</a></td>
+                    <td><span class="lang-badge">TypeScript</span></td>
+                    <td>Aqua Protocol web app and verification platform</td>
+                    <td>59</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/Arthur-Kamau/stratos" target="_blank">stratos</a></td>
+                    <td><span class="lang-badge">C</span></td>
+                    <td>Low-level, type-safe programming language with GUI toolkit</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/inblockio/aqua-js-cli" target="_blank">aqua-js-cli</a></td>
+                    <td><span class="lang-badge">JavaScript</span></td>
+                    <td>CLI for external verification with offline PDF support</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/inblockio/aqua-js-sdk" target="_blank">aqua-js-sdk</a></td>
+                    <td><span class="lang-badge">TypeScript</span></td>
+                    <td>Aqua Protocol v3.2 SDK with Nostr witness & TSA</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/SpecraDocs/specra-sdk" target="_blank">specra-sdk</a></td>
+                    <td><span class="lang-badge">Svelte</span></td>
+                    <td>Documentation framework on SvelteKit with multi-product versioning</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/rootz-global/epistery" target="_blank">epistery</a></td>
+                    <td><span class="lang-badge">JavaScript</span></td>
+                    <td>Web plugin for knowledge management</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/Arthur-Kamau/siwx-oidc-matrix-server" target="_blank">siwx-oidc-matrix</a></td>
+                    <td><span class="lang-badge">Docker</span></td>
+                    <td>Matrix homeserver with wallet login via crypto keys</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/SpecraDocs/specra-app" target="_blank">specra-app</a></td>
+                    <td><span class="lang-badge">Svelte</span></td>
+                    <td>Desktop & mobile app for Specra docs (Tauri)</td>
+                    <td>&mdash;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+        <h2>Education</h2>
+        <div class="edu-entry">
+            <span class="year">2013 &mdash; 2018</span>
+            <div>
+                <span class="degree">Bachelor of Arts, Sociology</span><br>
+                <span class="school">Moi University &mdash; 2nd Class Upper Division</span>
+            </div>
+        </div>
+        <div class="edu-entry">
+            <span class="year">2013 &mdash; 2017</span>
+            <div>
+                <span class="degree">CPA (Certified Public Accountant) &mdash; Section 5</span><br>
+                <span class="school">KCA University</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community -->
+    <div class="section">
+        <h2>Community & Mentorship</h2>
+        <ul>
+            <li>Active in Android and Flutter developer community in Kenya</li>
+            <li>Former Mentor, Andela Learning Community (ALC) &mdash; Google Africa Scholarship Program</li>
+            <li>Open-source contributor and Stack Overflow participant</li>
+            <li>Tech stack trainer for teams and individuals</li>
+        </ul>
+    </div>
+
+    <!-- Referees -->
+    <div class="section">
+        <h2>Referees</h2>
+        <div class="ref-grid">
+            <div class="ref-card">
+                <h4>Fazul Mahamed</h4>
+                <p>Director General (former), PSRA<br>Ministry of Interior, Kenya<br>info@psra.go.ke</p>
+            </div>
+            <div class="ref-card">
+                <h4>Kenneth Munene</h4>
+                <p>CEO & Full Stack Engineer<br>Kissdev<br>Phone: On request</p>
+            </div>
+            <div class="ref-card">
+                <h4>Duncan Githaiga</h4>
+                <p>CEO, Skill for Africa<br>Phone: On request</p>
+            </div>
+            <div class="ref-card">
+                <h4>Charles Waweru</h4>
+                <p>CEO/Founder<br>System Partners<br>Phone: On request</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="no-print">
+    &copy; 2026 Kenn Kamau. Nairobi, Kenya.
+</footer>
+
+</body>
+</html>
